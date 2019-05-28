@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-4">
+      <form class="form-horizontal">
+        <div class="form-group">
+          <label for="zip">Zip Code</label>
+          <input type="text" class="form-control" name="zip" id="zip" [(ngModel)]="zip" required>
+        </div>
+        <button type="button" (click)="getWeather()" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+    <div class="col-sm-12 col-md-8">
+      <div *ngIf="location != null">
+        <h3>Current weather conditions for {{ location.PrimaryPostalCode }}:</h3>
+        <p><strong>State:</strong> {{location?.AdministrativeArea.EnglishName}}</p>
+        <p><strong>City:</strong> {{location?.EnglishName}}</p>
+        <p><strong>Accuweather Link: </strong> <a href="{{weather?.Link}}">{{weather?.Link}}</a></p>
+        <p><strong>Weather:</strong> {{weather?.WeatherText}}</p>
+        <p><strong>Temperature</strong> {{weather?.Temperature.Metric.Value}}&#8451;</p>
+      </div>
+      <div *ngIf="location == null && !displayOnce" class="alert alert-danger" role="alert">
+        No results found!
+        <span *ngIf="error?.Code">{{error?.Message}}</span>
+
+      </div>
+    </div>
+  </div>
+
+</div>
